@@ -2,3 +2,7 @@
 .env.*.php
 .env.php
 .env
+/lumen.log
+/vendor
+.env
+.idea

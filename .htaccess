@@ -1,0 +1,5 @@
+RewriteEngine on
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} !^/bdd/public/
+RewriteRule ^(.*)$ /bdd//public/$1 [L]
