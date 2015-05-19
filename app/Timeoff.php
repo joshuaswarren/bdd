@@ -1,32 +1,40 @@
 <?php
 
 namespace App;
+use Rhumsaa\Uuid\Uuid;
 
 class Timeoff
 {
 
     public function create($name, $reason)
     {
-        // TODO: write logic here
+        $uuid1 = Uuid::uuid1();
+        $uuid = $uuid1->toString();
+        DB::insert('insert into requests (name, reason, uuid) values (?, ?, ?)', [$name, $reason, $uuid]);
+        return $uuid;
     }
 
     public function loadAll()
     {
-        // TODO: write logic here
+        $results = DB::select('select * from requests');
+        return $results;
     }
 
     public function loadPending()
     {
-        // TODO: write logic here
+        $results = DB::select('select * from requests WHERE reviewed = ?', [0]);
+        return $results;
     }
 
     public function approve($uuid)
     {
-        // TODO: write logic here
+        DB::update('update requests set reviewed = 1, approved = 1 where uuid = ?', [$uuid]);
+        return true;
     }
 
     public function deny($uuid)
     {
-        // TODO: write logic here
+        DB::update('update requests set reviewed = 1, approved = 0 where uuid = ?', [$uuid]);
+        return true;
     }
 }
