@@ -13,15 +13,15 @@ class TimeoffSpec extends ObjectBehavior
     }
 
     function it_creates_timeoff_requests() {
-        $this->create("Name", "reason")->shouldReturnAnInstanceOf('String');
+        $this->create("Name", "reason")->shouldBeString();
     }
 
     function it_loads_all_timeoff_requests() {
-        $this->loadAll()->shouldReturnAnInstanceOf('Array');
+        $this->loadAll()->shouldBeArray();
     }
 
     function it_loads_pending_timeoff_requests() {
-        $this->loadPending()->shouldReturnAnInstanceOf('Array');
+        $this->loadPending()->shouldBeArray();
     }
 
     function it_approves_timeoff_requests() {

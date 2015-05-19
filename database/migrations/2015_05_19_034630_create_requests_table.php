@@ -20,8 +20,6 @@ class CreateRequestsTable extends Migration {
             $t->string('uuid');
             $t->boolean('reviewed')->default(0);
             $t->boolean('approved')->default(0);
-            // created_at, updated_at DATETIME
-            $t->timestamps();
         });
 	}
 

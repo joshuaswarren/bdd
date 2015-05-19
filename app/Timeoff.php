@@ -1,7 +1,10 @@
 <?php
-
 namespace App;
+
+require_once('bootstrap/app.php');
+
 use Rhumsaa\Uuid\Uuid;
+use Illuminate\Support\Facades\DB;
 
 class Timeoff
 {
@@ -10,7 +13,11 @@ class Timeoff
     {
         $uuid1 = Uuid::uuid1();
         $uuid = $uuid1->toString();
-        DB::insert('insert into requests (name, reason, uuid) values (?, ?, ?)', [$name, $reason, $uuid]);
+        DB::table('requests')->insert([
+            'name' => $name,
+            'reason' => $reason,
+            'uuid' => $uuid,
+        ]);
         return $uuid;
     }
 

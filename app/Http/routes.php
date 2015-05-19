@@ -19,3 +19,7 @@ $app->get('/bdd/', function() use ($app) {
     return "Welcome to the world of BDD";
 });
 
+$app->get('/bdd/', function() use ($app) {
+    return "Welcome to the world of BDD";
+});
+
