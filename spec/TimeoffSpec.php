@@ -4,9 +4,12 @@ namespace spec\App;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Prophecy;
 
 class TimeoffSpec extends ObjectBehavior
 {
+    private $prophet;
+
     function it_is_initializable()
     {
         $this->shouldHaveType('App\Timeoff');
@@ -34,6 +37,12 @@ class TimeoffSpec extends ObjectBehavior
 
     function it_denies_timeoff_requests() {
         $this->deny("id")->shouldReturn(true);
+    }
+
+    function it_decrements_remaining_balance() {
+        $this->prophet = new \Prophecy\Prophet;
+        $dummyApi = $this->prophet->prophesize('HrmsApi');
+        $this->decrement($dummyApi, "uuid")->shouldReturn(true);
     }
 
 }

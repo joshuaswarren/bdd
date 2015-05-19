@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Pending Time Off Request Details</title>
+    <title>Pending Time Off Request Detailsk</title>
 </head>
 <body>
 <h1>Pending Time Off Request Details</h1>
