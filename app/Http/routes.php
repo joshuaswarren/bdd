@@ -31,3 +31,29 @@ $app->get('/bdd/timeoff/new/', function() use ($app) {
     }
 });
 
+$app->get('/bdd/timeoff/manage/', function() use ($app) {
+    $to = new \App\Timeoff();
+    if(Request::has('uuid')) {
+        $uuid = Request::input('uuid');
+        if(Request::has('process')) {
+            $process = Request::input('process');
+            if($process == 'approve') {
+                $to->approve($uuid);
+                return "Time Off Request Approved";
+            } else {
+                if($process == 'deny') {
+                    $to->deny($uuid);
+                    return "Time Off Request Denied";
+                }
+             }
+        } else {
+            $request = $to->load($uuid);
+            return view('request.manageSpecific', ['request' => $request]);
+        }
+    } else {
+        $requests = $to->loadAll();
+        return view('request.manage', ['requests' => $requests]);
+    }
+});
+
+

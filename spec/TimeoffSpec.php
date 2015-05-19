@@ -20,6 +20,10 @@ class TimeoffSpec extends ObjectBehavior
         $this->loadAll()->shouldBeArray();
     }
 
+    function it_loads_a_timeoff_request() {
+        $this->load("uuid")->shouldBeArray();
+    }
+
     function it_loads_pending_timeoff_requests() {
         $this->loadPending()->shouldBeArray();
     }

@@ -21,6 +21,11 @@ class Timeoff
         return $uuid;
     }
 
+    public function load($uuid) {
+        $results = DB::select('select * from requests WHERE uuid = ?', [$uuid]);
+        return $results;
+    }
+
     public function loadAll()
     {
         $results = DB::select('select * from requests');
