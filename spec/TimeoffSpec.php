@@ -2,12 +2,37 @@
 
 namespace spec\App;
 
+include_once('bootstrap/app.php');
+
+
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Rhumsaa\Uuid\Uuid;
+use Illuminate\Support\Facades\DB;
 
 class TimeoffSpec extends ObjectBehavior
 {
     private $prophet;
+    private $uuid;
+
+    function before()
+    {
+        $name = "Phpspec";
+        $reason = "I'm a robot";
+        $uuid1 = Uuid::uuid1();
+        $uuid = $uuid1->toString();
+        DB::table('requests')->insert([
+            'name' => $name,
+            'reason' => $reason,
+            'uuid' => $uuid,
+        ]);
+        $this->uuid = $uuid;
+    }
+
+    function after()
+    {
+        DB::delete('delete from requests where uuid = ?', [$this->uuid]);
+    }
 
     function it_is_initializable()
     {
@@ -39,12 +64,14 @@ class TimeoffSpec extends ObjectBehavior
     }
 
     function it_decrements_remaining_balance() {
+        $this->before();
         $this->prophet = new \Prophecy\Prophet;
-        $prophecy = $this->prophet->prophesize();
-        $prophecy->getUser(Argument::type('string'))->willReturn(Argument::type('string'));
-        $prophecy->decrement(Argument::type('string'), Argument::type('integer'))->willReturn(true);
+        $prophecy = $this->prophet->prophesize('App\HrmsApi');
+        $prophecy->getUser(Argument::type('string'))->willReturn('name');
+        $prophecy->decrement('name', Argument::type('integer'))->willReturn(true);
         $dummyApi = $prophecy->reveal();
-        $this->decrement($dummyApi, "uuid")->shouldReturn(true);
+        $this->decrement($dummyApi, $this->uuid)->shouldReturn(true);
+        $this->after();
     }
 
 }

@@ -14,7 +14,7 @@ class HrmsApiSpec extends ObjectBehavior
 
     function it_returns_a_user()
     {
-        $this->getUser("Name")->shouldBeString();
+        $this->getUser("Name")->shouldReturn(true);
     }
 
     function it_decrements()
