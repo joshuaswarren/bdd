@@ -19,7 +19,15 @@ $app->get('/bdd/', function() use ($app) {
     return "Welcome to the world of BDD";
 });
 
-$app->get('/bdd/', function() use ($app) {
-    return "Welcome to the world of BDD";
+$app->get('/bdd/timeoff/new/', function() use ($app) {
+    if(Request::has('name')) {
+        $to = new \App\Timeoff();
+        $name = Request::input('name');
+        $reason = Request::input('reason');
+        $to->create($name, $reason);
+        return "Time off request submitted";
+    } else {
+        return view('request.new');
+    }
 });
 

@@ -9,7 +9,7 @@ Feature: Submit Time Off Request
 
   Scenario: Time Off Request Form Works
     When I go to "/bdd/timeoff/new"
-    And I fill in "Name" with "Josh"
-    And I fill in "Reason" with "Attending a great conference"
-    And I press "Submit"
+    And I fill in "name" with "Josh"
+    And I fill in "reason" with "Attending a great conference"
+    And I press "submit"
     Then I should see "Time Off Request Submitted"

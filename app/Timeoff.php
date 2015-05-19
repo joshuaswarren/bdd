@@ -1,7 +1,7 @@
 <?php
 namespace App;
 
-require_once('bootstrap/app.php');
+include_once('../bootstrap/app.php');
 
 use Rhumsaa\Uuid\Uuid;
 use Illuminate\Support\Facades\DB;
