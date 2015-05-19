@@ -2,7 +2,11 @@
 
 namespace spec\App;
 
-include_once('bootstrap/app.php');
+if(file_exists('bootstrap/app.php')) {
+    require_once('bootstrap/app.php');
+} else {
+    require_once('../bootstrap/app.php');
+}
 
 
 use PhpSpec\ObjectBehavior;

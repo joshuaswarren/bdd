@@ -1,7 +1,11 @@
 <?php
 namespace App;
 
-include_once('bootstrap/app.php');
+if(file_exists('bootstrap/app.php')) {
+    require_once('bootstrap/app.php');
+} else {
+    require_once('../bootstrap/app.php');
+}
 
 use Rhumsaa\Uuid\Uuid;
 use Illuminate\Support\Facades\DB;
