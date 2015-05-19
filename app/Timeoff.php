@@ -49,4 +49,14 @@ class Timeoff
         DB::update('update requests set reviewed = 1, approved = 0 where uuid = ?', [$uuid]);
         return true;
     }
+
+    public function decrement($hrmsApi, $uuid, $daysOff = 1)
+    {
+        $results = DB::select('select * from requests WHERE uuid = ?', [$uuid]);
+        $result = $results[0];
+        $name = $result->name;
+        $hrmsUserId = $hrmsApi->getUser($name);
+        $response = $hrmsApi->decrement($hrmsUserId, $daysOff);
+        return $response;
+    }
 }

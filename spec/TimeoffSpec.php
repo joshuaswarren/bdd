@@ -4,7 +4,6 @@ namespace spec\App;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Prophecy;
 
 class TimeoffSpec extends ObjectBehavior
 {
@@ -41,7 +40,10 @@ class TimeoffSpec extends ObjectBehavior
 
     function it_decrements_remaining_balance() {
         $this->prophet = new \Prophecy\Prophet;
-        $dummyApi = $this->prophet->prophesize('HrmsApi');
+        $prophecy = $this->prophet->prophesize();
+        $prophecy->getUser(Argument::type('string'))->willReturn(Argument::type('string'));
+        $prophecy->decrement(Argument::type('string'), Argument::type('integer'))->willReturn(true);
+        $dummyApi = $prophecy->reveal();
         $this->decrement($dummyApi, "uuid")->shouldReturn(true);
     }
 
